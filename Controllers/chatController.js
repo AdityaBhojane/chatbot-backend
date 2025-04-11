@@ -53,4 +53,14 @@ export const getChatsByUserId = async (req, res) => {
       res.status(500).json({ message: "Error retrieving chats", error: err.message });
     }
   };
+
+export const getChatsById = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const chats = await Chat.find({_id:id}).sort({ createdAt: -1 });
+      res.status(200).json(chats);
+    } catch (err) {
+      res.status(500).json({ message: "Error retrieving chats", error: err.message });
+    }
+  };
   
